@@ -1,6 +1,5 @@
 import express from "express";
 import Paste from "../models/paste.js";
-import { nanoid } from "nanoid";
 
 const router = express.Router();
 
@@ -22,9 +21,11 @@ router.post("/", async (req, res) => {
     remainingViews: max_views ?? null,
   });
 
+  const baseUrl = process.env.BASE_URL || "http://localhost:5000";
+
   res.json({
     id: paste._id,
-    url: `http://localhost:5000/pastes/${paste._id}`,
+    url: `${baseUrl}/pastes/${paste._id}`,
   });
 });
 
